@@ -23,6 +23,11 @@ public class DialogueTrigger : MonoBehaviour
 
     public void LoadDialogue() {
         string fileName = "Assets/Resources/SampleDialogue.json";
+        LoadDialogue(fileName);
+    }
+
+
+    public void LoadDialogue(string fileName) {
         StreamReader reader = new StreamReader(fileName); 
         string json = reader.ReadToEnd();
         reader.Close();
@@ -33,6 +38,10 @@ public class DialogueTrigger : MonoBehaviour
 
     public void SaveDialogue() {
         string fileName = "Assets/Resources/SampleDialogue.json";
+        SaveDialogue(fileName);
+    }
+
+    public void SaveDialogue(string fileName) {
 
         //Write some text to the test.txt file
         StreamWriter writer = new StreamWriter(fileName, false); // append=false

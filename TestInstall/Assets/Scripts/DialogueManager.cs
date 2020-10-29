@@ -10,10 +10,12 @@ public class DialogueManager : MonoBehaviour
     private Queue<SentenceModel> sentences;
 
     // TODO These should be the fields of the dialogue panel prefab
-    [SerializeField] GameObject DialogueModal = null; // Dialogue Modal
-    [SerializeField] Image StandingCG = null; // Image
-    [SerializeField] Text NameText = null; // Name
-    [SerializeField] Text SentenceText = null; // Sentence
+    GameObject DialogueModal = null; // Dialogue Modal
+    Image StandingCG = null; // Image on screen
+    Text NameText = null; // Name on screen
+    Text SentenceText = null; // Sentence on screen
+    Transform OptionPanel = null; // option panel on screen
+    [SerializeField] GameObject OptionButton = null; // option button prefab
     
     // 
     // [SerializeField] // Options
@@ -21,6 +23,13 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         sentences = new Queue<SentenceModel>();
+        OptionPanel = GameObject.Find("Option Panel").transform;
+        StandingCG = GameObject.Find("Image Panel").GetComponentInChildren<Image>();
+        NameText = GameObject.Find("Name Textbox").GetComponent<Text>();
+        SentenceText = GameObject.Find("Sentence Textbox").GetComponent<Text>();
+        
+        
+
     }
 
     // Update is called once per frame
@@ -58,9 +67,9 @@ public class DialogueManager : MonoBehaviour
     private void SetSentence(SentenceModel sentence)
     {
 
-        SetName(sentence.name);
+        SetName(sentence.speakerName);
         SetCG(sentence.standingCg);
-        SetSpeech(sentence.speech);
+        SetSpeech(sentence.speechSentence);
         
     }
 

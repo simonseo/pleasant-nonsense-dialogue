@@ -9,34 +9,35 @@ using UnityEngine.UI;
 public class SentenceModel
 {
     [Tooltip("Name of speaker")]
-    public string name;
+    public string speakerName;
 
     public Sprite standingCg;
 
     [Tooltip("The sentence being spoken")]
     [TextArea(3,10)]
-    public string speech;
+    public string speechSentence;
 
     [Tooltip("Actions that the player can select")]
     [TextArea(3,10)]
-    public string[] options;
+    public string[] selectionOptions;
 
-    // if HasOptions, show both the sentence and the options    
-    public bool HasOptions {
+    // if HasSelections, show both the sentence and the options but not "nextline" button
+    // else show only nextline button
+    public bool HasSelection {
         get {
-            return options.Length > 0;
+            return selectionOptions.Length > 0;
         }
     }
 
     // names of condition flags. All of these need to be True for the sentence.
     // the actual flags are saved in DataModel.
-    public string[] flags;
+    public string[] conditionFlags;
     public bool HasFlags {
-        get => flags.Length > 0;
+        get => conditionFlags.Length > 0;
     }
     public bool AllFlagsTrue {
         get {
-            foreach (string flag in flags)
+            foreach (string flag in conditionFlags)
             {
                 if (!DataModel.current.GetPropertyValue<bool>(flag)) {
                     return false;
@@ -47,12 +48,12 @@ public class SentenceModel
     }
 
     // names of eventlisteners that will fire
-    public string[] triggers;
+    public string[] eventTriggers;
     public bool HasTriggers {
-        get => triggers.Length > 0;
+        get => eventTriggers.Length > 0;
     }
-    // should dialogue manager invoke the eventlisteners?
-    // where should the triggers be saved?
+    // should dialogue manager invoke the eventlisteners? yes.
+    // where should the triggers be saved? "TriggerManager"?
 
 
 
