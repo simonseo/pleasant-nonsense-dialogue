@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.EventSystems;
 using System.IO;
+using UnityEngine.UI;
 
 
 // at this point is equal to what DialogueModel should be doing.
 public class DialogueTrigger : MonoBehaviour
 {
     [SerializeField] SentenceModel[] dialogue = null;
+    InputField DialogueName = null;
 
     string JsonStr {
         get {
@@ -18,17 +20,21 @@ public class DialogueTrigger : MonoBehaviour
     }
 
     private void Start() {
-        
+        DialogueName = GameObject.Find("DialogueNameInputField").GetComponent<InputField>();
     }
 
     public void LoadDialogue() {
-        string fileName = "Assets/Resources/SampleDialogue.json";
+        string fileName = "SampleDialogue";
+        if (DialogueName.text.Length > 0) {
+            fileName = DialogueName.text;
+        }
         LoadDialogue(fileName);
     }
 
 
     public void LoadDialogue(string fileName) {
-        StreamReader reader = new StreamReader(fileName); 
+        string filePath = $"Assets/Resources/{fileName}.json";
+        StreamReader reader = new StreamReader(filePath); 
         string json = reader.ReadToEnd();
         reader.Close();
         Debug.Log(json);
@@ -37,22 +43,25 @@ public class DialogueTrigger : MonoBehaviour
 
 
     public void SaveDialogue() {
-        string fileName = "Assets/Resources/SampleDialogue.json";
+        string fileName = "SampleDialogue";
+        if (DialogueName.text.Length > 0) {
+            fileName = DialogueName.text;
+        }
         SaveDialogue(fileName);
     }
 
     public void SaveDialogue(string fileName) {
-
+        string filePath = $"Assets/Resources/{fileName}.json";
         //Write some text to the test.txt file
-        StreamWriter writer = new StreamWriter(fileName, false); // append=false
+        StreamWriter writer = new StreamWriter(filePath, false); // append=false
         writer.WriteLine(JsonStr);
         writer.Close();
 
         // below is for debugging purposes in UnityEditor
 
         //Re-import the file to update the reference in the editor
-        AssetDatabase.ImportAsset(fileName);  // works only in unityeditor
-        TextAsset asset = Resources.Load<TextAsset>("SampleDialogue");
+        AssetDatabase.ImportAsset(filePath);  // works only in unityeditor
+        TextAsset asset = Resources.Load<TextAsset>(fileName);
 
         //Print the text from the file
         Debug.Log(asset.text);

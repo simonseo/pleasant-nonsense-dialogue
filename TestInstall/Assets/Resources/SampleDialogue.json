@@ -2,7 +2,7 @@
     "dialogue": [{
         "speakerName": "VSCODE",
         "standingCg": {
-            "instanceID": 14904
+            "instanceID": 14950
         },
         "speechSentence": "어떻게 할거야?",
         "selectionOptions": ["죽인다", "살려준다"],
@@ -11,7 +11,7 @@
     }, {
         "speakerName": "서명근",
         "standingCg": {
-            "instanceID": 14904
+            "instanceID": 14950
         },
         "speechSentence": "그러면 그렇게 하자",
         "selectionOptions": [],
@@ -20,7 +20,7 @@
     }, {
         "speakerName": "최세민",
         "standingCg": {
-            "instanceID": 15012
+            "instanceID": 14952
         },
         "speechSentence": "그러면 나는?",
         "selectionOptions": [],
@@ -29,7 +29,7 @@
     }, {
         "speakerName": "이종환",
         "standingCg": {
-            "instanceID": 14904
+            "instanceID": 14950
         },
         "speechSentence": "너도!",
         "selectionOptions": [],

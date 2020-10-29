@@ -11,6 +11,8 @@ public class SentenceModel
     [Tooltip("Name of speaker")]
     public string speakerName;
 
+    // TODO this should be replaced with a string so that it's easier to edit in a text editor.
+    // couple that with a getter that gets the Sprite from the images folder by name. 
     public Sprite standingCg;
 
     [Tooltip("The sentence being spoken")]

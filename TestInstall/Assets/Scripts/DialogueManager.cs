@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -23,12 +24,14 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         sentences = new Queue<SentenceModel>();
-        OptionPanel = GameObject.Find("Option Panel").transform;
-        StandingCG = GameObject.Find("Image Panel").GetComponentInChildren<Image>();
-        NameText = GameObject.Find("Name Textbox").GetComponent<Text>();
-        SentenceText = GameObject.Find("Sentence Textbox").GetComponent<Text>();
-        
-        
+        Transform canvas = GameObject.Find("Canvas").transform;
+        DialogueModal = Utils.RecursiveFind(canvas, "Dialogue Panel").gameObject;
+
+        OptionPanel = Utils.RecursiveFind(canvas, "Option Panel");
+        StandingCG = Utils.RecursiveFind(canvas, "Image").GetComponent<Image>();
+        NameText = Utils.RecursiveFind(canvas, "Name Textbox").GetComponent<Text>();
+        SentenceText = Utils.RecursiveFind(canvas, "Sentence Textbox").GetComponent<Text>();
+
 
     }
 
@@ -58,18 +61,35 @@ public class DialogueManager : MonoBehaviour
     {
         if (sentences.Count == 0) {
             Debug.Log("conversation with " + NameText.text + " ended.");
+            DialogueModal.SetActive(false);
             return;
         }
         SetSentence(sentences.Dequeue());
 
     }
-
+    
+    
     private void SetSentence(SentenceModel sentence)
     {
-
+        Utils.DestroyChildren(OptionPanel);
+        if (sentence.HasSelection) {
+            SetOptions(sentence.selectionOptions);
+        }
         SetName(sentence.speakerName);
         SetCG(sentence.standingCg);
         SetSpeech(sentence.speechSentence);
+        
+    }
+
+    private void SetOptions(string[] selectionOptions)
+    {
+        foreach (string option in selectionOptions)
+        {
+            GameObject optionButton = Instantiate(OptionButton, OptionPanel);
+            optionButton.GetComponentInChildren<Text>().text = option;
+            optionButton.GetComponent<Button>().onClick.AddListener(NextSentence);
+
+        }
         
     }
 
