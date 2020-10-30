@@ -22,8 +22,11 @@ public class ButtonBehaviour : MonoBehaviour
 
         if (AmountModel == 1)
             TargetButton.onClick.AddListener(() => UpdateAmount(ref DataModel.current.num1));
-        else
+        else if (AmountModel == 2)
             TargetButton.onClick.AddListener(() => UpdateAmount(ref DataModel.current.num2));
+        else if (AmountModel == 3)
+            TargetButton.onClick.AddListener(() => UpdateAmount(ref DataModel.current.silverCoin));
+
     }
 
     void UpdateAmount(ref int amountModel) {

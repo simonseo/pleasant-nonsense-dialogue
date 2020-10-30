@@ -10,7 +10,9 @@ using UnityEngine.UI;
 // at this point is equal to what DialogueModel should be doing.
 public class DialogueTrigger : MonoBehaviour
 {
-    [SerializeField] SentenceModel[] dialogue = null;
+    // [SerializeField] SentenceModel[] dialogue = null;
+    [SerializeField] DialogueModel[] dialogues = null;
+
     InputField DialogueName = null;
 
     string JsonStr {
@@ -83,6 +85,6 @@ public class DialogueTrigger : MonoBehaviour
         // Debug.Log(JsonUtility.ToJson(this)); // jsonifies serializable fields of DialogueTrigger
         // Debug.Log(JsonUtility.ToJson(dialogue)); // doesn't print anything?? cause it's an array not an object?
         // Debug.Log(JsonUtility.ToJson(dialogue[0])); // jsonifies first SentenceModel of dialogue
-        manager.StartDialogue(dialogue);
+        manager.RegisterDialogues(dialogues);
     }
 }

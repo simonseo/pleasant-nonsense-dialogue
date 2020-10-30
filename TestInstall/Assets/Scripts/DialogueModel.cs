@@ -6,5 +6,5 @@ using UnityEngine;
 [System.Serializable]
 public class DialogueModel
 {
-    public SentenceModel[] sentences;
+    public SentenceModel[] dialogue;
 }

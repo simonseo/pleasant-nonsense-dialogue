@@ -50,4 +50,11 @@ public class DataModel
             return num2 == 5;
         }
     }
+
+    public int silverCoin;
+    public bool FlagSilverCoinAtLeast1 {
+        get => silverCoin >= 1;
+    }
+
+    public int[] gamblingChoices = {0,0,0};
 }
